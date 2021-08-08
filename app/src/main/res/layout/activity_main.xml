@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:weightSum="6"
+        android:weightSum="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,38 +33,25 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <SeekBar
-                android:id="@+id/steerBar"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:max="256"
-                android:progress="128" />
+            <io.github.controlwear.virtual.joystick.android.JoystickView
+                android:id="@+id/joystickView_left"
+                android:layout_width="169dp"
+                android:layout_height="179dp"
+                android:layout_marginTop="0dp"
+                app:JV_backgroundColor="#808080"
+                app:JV_borderColor="#707070"
+                app:JV_borderWidth="8dp"
+                app:JV_buttonColor="#FFFFFF" />
 
-            <TextView
-                android:id="@+id/steerBarValueDisplay"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <SeekBar
-                android:id="@+id/throttleBar"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:max="256"
-                android:progress="0" />
-
-            <TextView
-                android:id="@+id/throttleBarValueDisplay"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content" />
+            <io.github.controlwear.virtual.joystick.android.JoystickView
+                android:id="@+id/joystickView_right"
+                android:layout_width="167dp"
+                android:layout_height="279dp"
+                android:layout_marginTop="0dp"
+                app:JV_backgroundColor="#AAAAAA"
+                app:JV_borderColor="#717171"
+                app:JV_borderWidth="8dp"
+                app:JV_buttonColor="#505050" />
 
         </LinearLayout>
 
