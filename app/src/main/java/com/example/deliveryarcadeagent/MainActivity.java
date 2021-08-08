@@ -9,6 +9,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,9 +31,16 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 
-public class MainActivity extends AppCompatActivity {
+class Commands {
+    JSONObject movement(int angle, int strength) throws JSONException {
+        String rawMovementJSON = "{\"type\":\"command\", \"joystick\": {\"angle\":" + angle + ", \"strength\":" + strength + "}}\n";
 
-    private JSONObject networkConfig;
+        return new JSONObject(rawMovementJSON);
+    }
+}
+
+
+public class MainActivity extends AppCompatActivity {
 
 
     private static class JsonTask extends AsyncTask<String, String, JSONObject> {
@@ -79,16 +87,17 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-
-//        @Override
-//        protected void onPostExecute(JSONObject result) {
-//            super.onPostExecute(result);
-//            networkConfig = result;
-//        }
     }
 
-
+    private JSONObject networkConfig;
     private Socket socket;
+
+    int joystickInterval = 10;
+    int lastStrength;
+    int lastAngle;
+
+    Commands commands = new Commands();
+
 
     private final Emitter.Listener receiveInfo = new Emitter.Listener() {
         @Override
@@ -121,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         }
         String socketIOURI = "http://" + server_ip + ":" + server_port + "/app";
         Log.i("config", "Connecting to: " + socketIOURI);
+        Toast socketIOURIToast = Toast.makeText(this.getApplicationContext(), "Connecting to: " + socketIOURI, Toast.LENGTH_LONG);
+        socketIOURIToast.show();
         socket = IO.socket(URI.create(socketIOURI));
         socket.on("info", receiveInfo);
         socket.connect();
@@ -142,19 +153,21 @@ public class MainActivity extends AppCompatActivity {
         JoystickView joystick_left = findViewById(R.id.joystickView_left);
         JoystickView joystick_right = findViewById(R.id.joystickView_right);
 
-        joystick_left.setOnMoveListener(new JoystickView.OnMoveListener() {
-            @Override
-            public void onMove(int angle, int strength) {
-                Log.d("joystick", "Left A " + angle + " S " + strength);
+        joystick_left.setOnMoveListener((angle, strength) -> {
+            try {
+                if (lastStrength != strength || lastAngle != angle) {
+                    lastStrength = strength;
+                    lastAngle = angle;
+                    JSONObject joystickJSON = commands.movement(angle, strength);
+                    Log.d("command", "Sending " + joystickJSON);
+                    socket.emit("command", joystickJSON);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
+        }, 1000 / joystickInterval);
 
-        joystick_right.setOnMoveListener(new JoystickView.OnMoveListener() {
-            @Override
-            public void onMove(int angle, int strength) {
-                Log.d("joystick", "Right A " + angle + " S " + strength);
-            }
-        });
+        joystick_right.setOnMoveListener((angle, strength) -> Log.d("joystick", "Right A " + angle + " S " + strength), 1000 / joystickInterval);
     }
 
     public void press_up(View view) {
