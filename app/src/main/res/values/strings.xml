@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Delivery Arcade Agent</string>
-    <string name="button_up">UP</string>
-    <string name="button_down">DOWN</string>
-    <string name="button_left">LEFT</string>
-    <string name="button_right">RIGHT</string>
-    <string name="button_fire">FIRE</string>
+    <string name="button_sound">HONK</string>
+    <string name="button_container">OPEN</string>
 </resources>

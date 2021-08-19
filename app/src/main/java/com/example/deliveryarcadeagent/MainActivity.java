@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         String socketIOURI = "http://" + server_ip + ":" + server_port + "/app";
-        Log.i("config", "Connecting to: " + socketIOURI);
+        Log.i("config", "Control server URI is " + socketIOURI);
         Toast socketIOURIToast = Toast.makeText(this.getApplicationContext(), "Connecting to: " + socketIOURI, Toast.LENGTH_LONG);
         socketIOURIToast.show();
         socket = IO.socket(URI.create(socketIOURI));
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
         WebView webcamView = findViewById(R.id.webcamView);
         String WebcamPageURI = "http://" + server_ip + ":" + server_port + "/video";
-        Log.i("config", "Connecting to: " + WebcamPageURI);
+        Log.i("config", "Webcam page URI is " + WebcamPageURI);
         webcamView.loadUrl(WebcamPageURI);
         webcamView.setWebViewClient(new WebViewClient());
         WebSettings webcamViewSettings = webcamView.getSettings();
