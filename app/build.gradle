@@ -6,7 +6,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.example.deliveryarcadeagent"
+        applicationId "com.example.deliveryarcadeapp"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1

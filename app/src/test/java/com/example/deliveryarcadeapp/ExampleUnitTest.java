@@ -1,4 +1,4 @@
-package com.example.deliveryarcadeagent;
+package com.example.deliveryarcadeapp;
 
 import org.junit.Test;
 

@@ -1,2 +1,2 @@
-rootProject.name = "Delivery Arcade Agent"
+rootProject.name = "Delivery Arcade App"
 include ':app'

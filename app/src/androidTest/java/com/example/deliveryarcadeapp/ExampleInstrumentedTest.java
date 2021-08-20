@@ -1,4 +1,4 @@
-package com.example.deliveryarcadeagent;
+package com.example.deliveryarcadeapp;
 
 import android.content.Context;
 
