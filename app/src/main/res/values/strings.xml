@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Delivery Arcade App</string>
-    <string name="button_sound">HONK</string>
-    <string name="button_container">OPEN</string>
+    <string name="button_sound_honk">HONK</string>
+    <string name="button_sound_hello">HELLO</string>
+    <string name="button_container_open">OPEN</string>
+    <string name="button_container_close">CLOSE</string>
 </resources>
