@@ -37,6 +37,12 @@ class Commands {
 
         return new JSONObject(rawMovementJSON);
     }
+
+    JSONObject soundEffect(int mode, int random, int language) throws JSONException {
+        String rawSoundEffectJSON = "{\"type\":\"command\", \"sound_effect\": {\"mode\":" + mode + ", \"random\":" + random + ", \"language\":" + language + "}}\n";
+
+        return new JSONObject(rawSoundEffectJSON);
+    }
 }
 
 
@@ -170,14 +176,24 @@ public class MainActivity extends AppCompatActivity {
         joystick_right.setOnMoveListener((angle, strength) -> Log.d("joystick", "Right A " + angle + " S " + strength), 1000 / joystickInterval);
     }
 
-    public void press_up(View view) {
-        Log.i("button", "up");
-        socket.emit("command", "UP");
+    public void press_sound_honk(View view) {
+        try {
+            JSONObject soundEffectJSON = commands.soundEffect(4, 1, 0);
+            Log.i("button", "button onClick - Sound \"Honk\"");
+            socket.emit("command", soundEffectJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void press_down(View view) {
-        Log.i("button", "down");
-        socket.emit("command", "DOWN");
+    public void press_sound_hello(View view) {
+        try {
+            JSONObject soundEffectJSON = commands.soundEffect(0, 1, 0);
+            Log.i("button", "button onClick - Sound \"Hello\"");
+            socket.emit("command", soundEffectJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void press_left(View view) {
