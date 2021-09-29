@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Delivery Arcade App</string>
-    <string name="button_sound_honk">HONK</string>
-    <string name="button_sound_hello">HELLO</string>
+    <string name="button_sound_greeting">HELLO</string>
+    <string name="button_sound_apology">SORRY</string>
+    <string name="button_sound_appreciation">THANKS</string>
+    <string name="button_sound_yield">GET OFF</string>
+    <string name="button_sound_alert">ALERT</string>
+    <string name="button_sound_pigeon">ATTACK</string>
     <string name="button_container_open">OPEN</string>
     <string name="button_container_close">CLOSE</string>
 </resources>

@@ -34,14 +34,17 @@ import io.socket.emitter.Emitter;
 class Commands {
     JSONObject movement(int angle, int strength) throws JSONException {
         String rawMovementJSON = "{\"type\":\"command\", \"joystick\": {\"angle\":" + angle + ", \"strength\":" + strength + "}}\n";
-
         return new JSONObject(rawMovementJSON);
     }
 
-    JSONObject soundEffect(int mode, int random, int language) throws JSONException {
-        String rawSoundEffectJSON = "{\"type\":\"command\", \"sound_effect\": {\"mode\":" + mode + ", \"random\":" + random + ", \"language\":" + language + "}}\n";
-
+    JSONObject soundEffect(String code) throws JSONException {
+        String rawSoundEffectJSON = "{\"type\":\"command\", \"sound_effect\": {\"code\":" + code + "}}\n";
         return new JSONObject(rawSoundEffectJSON);
+    }
+
+    JSONObject lidAction(String action) throws JSONException {
+        String rawLidActionJSON = "{\"type\":\"command\", \"lid_action\": {\"action\":" + action + "}}\n";
+        return new JSONObject(rawLidActionJSON);
     }
 }
 
@@ -176,34 +179,80 @@ public class MainActivity extends AppCompatActivity {
         joystick_right.setOnMoveListener((angle, strength) -> Log.d("joystick", "Right A " + angle + " S " + strength), 1000 / joystickInterval);
     }
 
-    public void press_sound_honk(View view) {
+    public void press_sound_greeting(View view) {
         try {
-            JSONObject soundEffectJSON = commands.soundEffect(4, 1, 0);
-            Log.i("button", "button onClick - Sound \"Honk\"");
+            JSONObject soundEffectJSON = commands.soundEffect("GREETING");
+            Log.i("button", "button onClick - Sound \"GREETING\"");
+            socket.emit("command", soundEffectJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void press_sound_apology(View view) {
+        try {
+            JSONObject soundEffectJSON = commands.soundEffect("APOLOGY");
+            Log.i("button", "button onClick - Sound \"APOLOGY\"");
+            socket.emit("command", soundEffectJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void press_sound_appreciation(View view) {
+        try {
+            JSONObject soundEffectJSON = commands.soundEffect("APPRECIATION");
+            Log.i("button", "button onClick - Sound \"APPRECIATION\"");
+            socket.emit("command", soundEffectJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void press_sound_yield(View view) {
+        try {
+            JSONObject soundEffectJSON = commands.soundEffect("YIELD");
+            Log.i("button", "button onClick - Sound \"YIELD\"");
             socket.emit("command", soundEffectJSON);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void press_sound_hello(View view) {
+    public void press_sound_alert(View view) {
         try {
-            JSONObject soundEffectJSON = commands.soundEffect(0, 1, 0);
-            Log.i("button", "button onClick - Sound \"Hello\"");
+            JSONObject soundEffectJSON = commands.soundEffect("ALERT");
+            Log.i("button", "button onClick - Sound \"ALERT\"");
+            socket.emit("command", soundEffectJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void press_sound_pigeon(View view) {
+        try {
+            JSONObject soundEffectJSON = commands.soundEffect("PIGEON");
+            Log.i("button", "button onClick - Sound \"PIGEON\"");
             socket.emit("command", soundEffectJSON);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void press_left(View view) {
-        Log.i("button", "left");
-        socket.emit("command", "LEFT");
+    public void press_open(View view) {
+        try {
+            JSONObject lidActionJSON = commands.lidAction("open");
+            Log.i("button", "button onClick - Lid Open");
+            socket.emit("command", lidActionJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void press_right(View view) {
-        Log.i("button", "right");
-        socket.emit("command", "RIGHT");
+    public void press_close(View view) {
+        try {
+            JSONObject lidActionJSON = commands.lidAction("close");
+            Log.i("button", "button onClick - Lid Close");
+            socket.emit("command", lidActionJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

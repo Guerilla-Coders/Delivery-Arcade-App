@@ -21,15 +21,35 @@
     </WebView>
 
     <Button
-        android:id="@+id/button_sound_honk"
-        android:layout_width="80dp"
-        android:layout_height="48dp"
+        android:id="@+id/button_sound_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:onClick="press_sound_honk"
-        android:text="@string/button_sound_honk"
+        android:onClick="press_sound_alert"
+        android:text="@string/button_sound_alert"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_sound_hello" />
+        app:layout_constraintEnd_toStartOf="@+id/button_sound_pigeon" />
+
+    <Button
+        android:id="@+id/button_sound_appreciation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:onClick="press_sound_appreciation"
+        android:text="@string/button_sound_appreciation"
+        app:layout_constraintBottom_toTopOf="@+id/button_sound_alert"
+        app:layout_constraintEnd_toStartOf="@+id/button_sound_yield" />
+
+    <Button
+        android:id="@+id/button_sound_greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:onClick="press_sound_greeting"
+        android:text="@string/button_sound_greeting"
+        app:layout_constraintBottom_toTopOf="@+id/button_sound_appreciation"
+        app:layout_constraintEnd_toStartOf="@+id/button_sound_apology" />
 
     <Button
         android:id="@+id/button_container_close"
@@ -42,13 +62,31 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_sound_hello"
+        android:id="@+id/button_sound_pigeon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:onClick="press_sound_hello"
-        android:text="@string/button_sound_hello"
+        android:onClick="press_sound_pigeon"
+        android:text="@string/button_sound_pigeon"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button_sound_yield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="press_sound_yield"
+        android:text="@string/button_sound_yield"
+        app:layout_constraintBottom_toTopOf="@+id/button_sound_pigeon"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button_sound_apology"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="press_sound_apology"
+        android:text="@string/button_sound_apology"
+        app:layout_constraintBottom_toTopOf="@+id/button_sound_yield"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
@@ -70,7 +108,7 @@
         app:JV_borderColor="#717171"
         app:JV_borderWidth="8dp"
         app:JV_buttonColor="#505050"
-        app:layout_constraintBottom_toTopOf="@+id/button_sound_honk"
+        app:layout_constraintBottom_toTopOf="@+id/button_sound_apology"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <io.github.controlwear.virtual.joystick.android.JoystickView
@@ -81,7 +119,7 @@
         app:JV_borderColor="#707070"
         app:JV_borderWidth="8dp"
         app:JV_buttonColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/button_container_open"
+        app:layout_constraintBottom_toTopOf="@+id/button_sound_apology"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
